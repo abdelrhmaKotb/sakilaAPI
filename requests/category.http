@@ -1,0 +1,14 @@
+POST http://localhost:8090/sakilaAPI/ws/Category HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:add>
+            <arg0>
+                <name>gdf</name>
+            </arg0>
+            </jets:add>
+        </soap:Body>
+</soap:Envelope>
