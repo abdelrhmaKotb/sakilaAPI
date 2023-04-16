@@ -1,41 +1,32 @@
 package gov.iti.jets.services;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.Set;
-import javax.validation.ConstraintViolation;
-import gov.iti.jets.exceptions.ValidationException;
-import gov.iti.jets.repositories.RepositoryImpl;
+import java.util.ArrayList;
+import java.util.List;
+
 import gov.iti.jets.repositories.entities.Category;
+import gov.iti.jets.repositories.entities.Film;
 import gov.iti.jets.services.dto.categories.CategoryDto;
+import gov.iti.jets.services.dto.categories.CategoryFilmCategoriesDto;
+import gov.iti.jets.services.dto.film.FlatFilmDto;
+import gov.iti.jets.services.mappers.categories.CategoryFilmCategoriesMapper;
 import gov.iti.jets.services.mappers.categories.CategoryMapper;
-import gov.iti.jets.services.validation.ValidatorHandler;
+import gov.iti.jets.services.mappers.film.FlatFilmMapper;
 
-public class CategoryService {
-    /*
-     * add categoty service
-     */
-    public CategoryDto add(CategoryDto categoryDto) throws ValidationException,Exception {
+public class CategoryService extends ServiceImpl<Category, CategoryDto, Integer> {
 
-        var validator = ValidatorHandler.getValidator();
-
-        Set<ConstraintViolation<CategoryDto>> violations = validator.validate(categoryDto);      
-
-        if (violations.size() > 0) {
-            throw new ValidationException(ValidatorHandler.<CategoryDto>getErrorMessage(violations));
-        }
-
-        RepositoryImpl<Category, Integer> impl = new RepositoryImpl<>(Category.class);
-
-        Category category = CategoryMapper.INSTANCE.toEntity(categoryDto);
-        category.setLastUpdate(Date.valueOf(LocalDate.now()));
-
-        Category res = impl.create(category);
-
-        if(res == null){
-            throw new Exception("un saved");
-        }
-
-        return CategoryMapper.INSTANCE.toDto(res);
+    public CategoryService() {
+        super(Category.class, CategoryMapper.INSTANCE);
     }
+
+    public List<FlatFilmDto> getActorFilms(int id) {
+        ServiceImpl<Category, CategoryFilmCategoriesDto, Integer> serviceImpl = new ServiceImpl<>(Category.class,
+                CategoryFilmCategoriesMapper.INSTANCE);
+
+        // we can add filed as we like :)))
+        var res = serviceImpl.get_impl().<FlatFilmDto>query(
+                "SELECT new gov.iti.jets.services.dto.film.FlatFilmDto(f.film.id,f.film.title) FROM FilmCategory f where category.id = ?1",
+                String.valueOf(id));
+        return res;
+    }
+
 }

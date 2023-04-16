@@ -1,21 +1,45 @@
 package gov.iti.jets;
 
-import gov.iti.jets.exceptions.ValidationException;
-import gov.iti.jets.services.dto.categories.CategoryDto;
+import java.sql.Date;
+import java.time.LocalDate;
+
+import gov.iti.jets.api.soap.services.Film;
+import gov.iti.jets.services.ActorService;
+import gov.iti.jets.services.AddressService;
+import gov.iti.jets.services.FilmService;
+import gov.iti.jets.services.LanguageService;
+import gov.iti.jets.services.dto.actor.ActorDto;
+import gov.iti.jets.services.dto.film.FilmDto;
+import gov.iti.jets.services.dto.language.LanguageDto;
 
 public class Main {
     public static void main(String[] args) {
-        // RepositoryImpl<Category,Integer> repositoryImpl = new RepositoryImpl<>(Category.class);
 
-        // System.out.println(CategoryMapper.INSTANCE.toEntity(CategoryMapper.INSTANCE.toDto(repositoryImpl.find(1))));
-        // System.out.println(repositoryImpl.find(1));
+        Film f = new Film();
+        FilmDto dto = new FilmDto();
+        ActorDto ac = new ActorDto();
+        ac.setFirstName("new ");
+        ac.setLastName("actor here");
+        // ac.setId(1);
+        ac.setLastUpdate(java.sql.Date.valueOf(LocalDate.now()));
+        // ac.setId(1);
 
-        gov.iti.jets.api.soap.services.Category cat = new gov.iti.jets.api.soap.services.Category();
-
+        dto.setTitle("film drto");
+        dto.setActor(ac);
+        dto.setReplacementCost(55D);
+        dto.setRentalRate(55D);
+        dto.setRentalDuration((short)4);
+        dto.setLastUpdate(Date.valueOf(LocalDate.now()));
+        LanguageDto dto2 =  new LanguageDto();
+        // dto2.setId(1);
+        dto2.setName("Ds");
+        // dto.setLanguage(dto2);
+        // dto.setActors();
+        
         try {
-            cat.add(new CategoryDto(null, null, null));
+            f.createFilm(dto);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }

@@ -2,7 +2,7 @@ package gov.iti.jets.repositories.entities;
 
 import jakarta.persistence.*;
 
-import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -18,7 +18,7 @@ public class Country {
     private String country;
 
     @Column(name = "last_update", nullable = false)
-    private Instant lastUpdate;
+    private Date lastUpdate;
 
     @OneToMany(mappedBy = "country")
     private Set<City> cities = new LinkedHashSet<>();
@@ -39,11 +39,11 @@ public class Country {
         this.country = country;
     }
 
-    public Instant getLastUpdate() {
+    public Date getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Instant lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -54,5 +54,12 @@ public class Country {
     public void setCities(Set<City> cities) {
         this.cities = cities;
     }
+
+    @Override
+    public String toString() {
+        return "Country [id=" + id + ", country=" + country + ", lastUpdate=" + lastUpdate + "]";
+    }
+
+    
 
 }

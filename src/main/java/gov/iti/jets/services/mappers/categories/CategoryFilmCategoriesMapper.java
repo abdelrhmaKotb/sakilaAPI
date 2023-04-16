@@ -7,10 +7,7 @@ import gov.iti.jets.repositories.entities.Category;
 import gov.iti.jets.services.dto.categories.CategoryFilmCategoriesDto;
 
 @Mapper
-public interface CategoryFilmCategoriesMapper {
+public interface CategoryFilmCategoriesMapper extends gov.iti.jets.services.mappers.Mapper<Category,CategoryFilmCategoriesDto> {
     CategoryFilmCategoriesMapper INSTANCE = Mappers.getMapper(CategoryFilmCategoriesMapper.class);
 
-    CategoryFilmCategoriesDto toDto(Category category);
-
-    Category toEntity(CategoryFilmCategoriesDto category);
 }

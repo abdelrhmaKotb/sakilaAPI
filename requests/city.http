@@ -1,0 +1,83 @@
+POST http://localhost:8090/sakilaAPI/ws/City HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:getAllCities />
+        </soap:Body>
+</soap:Envelope>
+
+###
+
+POST http://localhost:8090/sakilaAPI/ws/City HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:getCity>
+                <cityId>19</cityId>
+            </jets:getCity>
+        </soap:Body>
+</soap:Envelope>
+
+###
+POST http://localhost:8090/sakilaAPI/ws/City HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:createCity>
+            <city>
+                <city>new city2</city>
+                    <country>
+                        <id>60</id>
+                    </country>
+            </city>
+            </jets:createCity>
+        </soap:Body>
+</soap:Envelope>
+
+###
+
+POST http://localhost:8090/sakilaAPI/ws/City HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:deleteCity>
+            <cityId>
+                 605
+            </cityId>
+            </jets:deleteCity>
+        </soap:Body>
+</soap:Envelope>
+
+###
+
+POST http://localhost:8090/sakilaAPI/ws/City HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:updateCity>
+            <city>
+                <id>603</id>
+                <city>new city aqq</city>
+                 <country>
+                     <id>61</id>
+                 </country>
+            </city>
+            </jets:updateCity>
+        </soap:Body>
+</soap:Envelope>
+

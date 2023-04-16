@@ -2,9 +2,11 @@ package gov.iti.jets.repositories.entities;
 
 import jakarta.persistence.*;
 
-import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import javax.swing.GroupLayout.Alignment;
 
 @Entity
 @Table(name = "actor")
@@ -21,10 +23,10 @@ public class Actor {
     private String lastName;
 
     @Column(name = "last_update", nullable = false)
-    private Instant lastUpdate;
+    private Date lastUpdate;
 
-    @OneToMany(mappedBy = "actor")
-    private Set<FilmActor> filmActors = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "actor",cascade = CascadeType.ALL)
+    private Set<FilmActor> films = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -50,20 +52,30 @@ public class Actor {
         this.lastName = lastName;
     }
 
-    public Instant getLastUpdate() {
+    public Date getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Instant lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
     public Set<FilmActor> getFilmActors() {
-        return filmActors;
+        return films;
     }
 
     public void setFilmActors(Set<FilmActor> filmActors) {
-        this.filmActors = filmActors;
+        // this.films = filmActors;
+        var i = filmActors.iterator();
+        while (i.hasNext()) {
+            films.add(new FilmActor(this, i.next().getFilm()));
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Actor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", lastUpdate=" + lastUpdate
+                + "]";
     }
 
 }

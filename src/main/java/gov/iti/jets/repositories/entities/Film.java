@@ -1,11 +1,11 @@
 package gov.iti.jets.repositories.entities;
 
 import jakarta.persistence.*;
-
-import java.math.BigDecimal;
-import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import gov.iti.jets.repositories.EntityHandler;
 
 @Entity
 @Table(name = "film")
@@ -15,7 +15,7 @@ public class Film {
     @Column(name = "film_id", columnDefinition = "SMALLINT UNSIGNED not null")
     private Integer id;
 
-    @Column(name = "title", nullable = false, length = 128)
+    @Column(name = "title", length = 128)
     private String title;
 
     @Lob
@@ -25,8 +25,8 @@ public class Film {
     @Column(name = "release_year")
     private Integer releaseYear;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "language_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true,cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "language_id")
     private Language language;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,14 +36,14 @@ public class Film {
     @Column(name = "rental_duration", columnDefinition = "TINYINT UNSIGNED not null")
     private Short rentalDuration;
 
-    @Column(name = "rental_rate", nullable = false, precision = 4, scale = 2)
-    private BigDecimal rentalRate;
+    @Column(name = "rental_rate", precision = 4, scale = 2)
+    private Double rentalRate;
 
     @Column(name = "length", columnDefinition = "SMALLINT UNSIGNED")
     private Integer length;
 
-    @Column(name = "replacement_cost", nullable = false, precision = 5, scale = 2)
-    private BigDecimal replacementCost;
+    @Column(name = "replacement_cost", precision = 5, scale = 2)
+    private Double replacementCost;
 
     @Lob
     @Column(name = "rating")
@@ -53,17 +53,23 @@ public class Film {
     @Column(name = "special_features")
     private String specialFeatures;
 
-    @Column(name = "last_update", nullable = false)
-    private Instant lastUpdate;
+    @Column(name = "last_update")
+    private Date lastUpdate;
 
-    @OneToMany(mappedBy = "film")
+    @OneToMany(mappedBy = "film",cascade = CascadeType.ALL)
     private Set<Inventory> inventories = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "film")
-    private Set<FilmActor> filmActors = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "film",cascade = CascadeType.ALL,orphanRemoval = true)
+    private Set<FilmActor> actors = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "film")
+    @OneToMany(mappedBy = "film",cascade = CascadeType.ALL)
     private Set<FilmCategory> filmCategories = new LinkedHashSet<>();
+
+    // public void setActor(Actor actor){
+    //     FilmActor filmActor = new FilmActor(actor, this);
+    //     filmActors.add(filmActor);
+    //     actor.getFilmActors().add(filmActor);
+    // }
 
     public Integer getId() {
         return id;
@@ -121,11 +127,11 @@ public class Film {
         this.rentalDuration = rentalDuration;
     }
 
-    public BigDecimal getRentalRate() {
+    public Double getRentalRate() {
         return rentalRate;
     }
 
-    public void setRentalRate(BigDecimal rentalRate) {
+    public void setRentalRate(Double rentalRate) {
         this.rentalRate = rentalRate;
     }
 
@@ -137,11 +143,11 @@ public class Film {
         this.length = length;
     }
 
-    public BigDecimal getReplacementCost() {
+    public Double getReplacementCost() {
         return replacementCost;
     }
 
-    public void setReplacementCost(BigDecimal replacementCost) {
+    public void setReplacementCost(Double replacementCost) {
         this.replacementCost = replacementCost;
     }
 
@@ -161,11 +167,11 @@ public class Film {
         this.specialFeatures = specialFeatures;
     }
 
-    public Instant getLastUpdate() {
+    public Date getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Instant lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -178,11 +184,17 @@ public class Film {
     }
 
     public Set<FilmActor> getFilmActors() {
-        return filmActors;
+        return actors;
     }
 
-    public void setFilmActors(Set<FilmActor> filmActors) {
-        this.filmActors = filmActors;
+    public void setFilmActors(Set<FilmActor> actors) {
+        // this.filmActors = filmActors;
+        var i = actors.iterator();
+        while(i.hasNext()){
+            System.out.println("here");
+            this.actors.add(new FilmActor(i.next().getActor(), this));
+        }
+        System.out.println("Ds " + actors );
     }
 
     public Set<FilmCategory> getFilmCategories() {
@@ -192,5 +204,17 @@ public class Film {
     public void setFilmCategories(Set<FilmCategory> filmCategories) {
         this.filmCategories = filmCategories;
     }
+
+    @Override
+    public String toString() {
+        return "Film [id=" + id + ", title=" + title + ", description=" + description + ", releaseYear=" + releaseYear
+                + ", language=" + language + ", originalLanguage=" + originalLanguage + ", rentalDuration="
+                + rentalDuration + ", rentalRate=" + rentalRate + ", length=" + length + ", replacementCost="
+                + replacementCost + ", rating=" + rating + ", specialFeatures=" + specialFeatures + ", lastUpdate="
+                + lastUpdate + ", inventories=" + inventories + ", filmActors=" + actors + ", filmCategories="
+                + filmCategories + "]";
+    }
+
+    
 
 }

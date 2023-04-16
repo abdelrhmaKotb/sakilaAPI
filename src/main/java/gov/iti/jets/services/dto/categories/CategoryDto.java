@@ -19,7 +19,6 @@ public class CategoryDto implements Serializable {
     public CategoryDto() {
     }
 
-    
     public CategoryDto(Integer id, String name, Date lastUpdate) {
         this.id = id;
         this.name = name;
@@ -36,6 +35,10 @@ public class CategoryDto implements Serializable {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

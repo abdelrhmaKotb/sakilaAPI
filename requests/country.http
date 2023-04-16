@@ -1,0 +1,77 @@
+POST http://localhost:8090/sakilaAPI/ws/Country HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:getAllCountries />
+        </soap:Body>
+</soap:Envelope>
+
+###
+
+POST http://localhost:8090/sakilaAPI/ws/Country HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:getCountry>
+                <countryId>19</countryId>
+            </jets:getCountry>
+        </soap:Body>
+</soap:Envelope>
+
+###
+POST http://localhost:8090/sakilaAPI/ws/Country HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:createCountry>
+            <country>
+                <country>new one</country>
+            </country>
+            </jets:createCountry>
+        </soap:Body>
+</soap:Envelope>
+
+###
+
+POST http://localhost:8090/sakilaAPI/ws/Country HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:deleteCountry>
+            <countryId>
+                 112
+            </countryId>
+            </jets:deleteCountry>
+        </soap:Body>
+</soap:Envelope>
+
+###
+
+POST http://localhost:8090/sakilaAPI/ws/Country HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:updateCountry>
+            <country>
+               <id>112</id>
+               <country>new ds</country>
+            </country>
+            </jets:updateCountry>
+        </soap:Body>
+</soap:Envelope>
+

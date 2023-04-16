@@ -11,12 +11,12 @@ public class FilmCategory {
     private FilmCategoryId id;
 
     @MapsId("filmId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "film_id", nullable = false)
     private Film film;
 
     @MapsId("categoryId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
@@ -55,4 +55,11 @@ public class FilmCategory {
         this.lastUpdate = lastUpdate;
     }
 
+    @Override
+    public String toString() {
+        return "FilmCategory [id=" + id + ", film=" + film.getId() + ", category=" + category.getId() + ", lastUpdate=" + lastUpdate
+                + "]";
+    }
+
+    
 }

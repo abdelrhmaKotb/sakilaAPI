@@ -3,4 +3,34 @@
         name="CategoryWebService"
         implementation="gov.iti.jets.api.soap.services.Category"
         url-pattern="/ws/Category" />
+
+    <endpoint
+        name="LanguageWebService"
+        implementation="gov.iti.jets.api.soap.services.Language"
+        url-pattern="/ws/Language" />
+
+    <endpoint
+        name="ActorWebService"
+        implementation="gov.iti.jets.api.soap.services.Actor"
+        url-pattern="/ws/Actor" />
+
+    <endpoint
+        name="CountryWebService"
+        implementation="gov.iti.jets.api.soap.services.Country"
+        url-pattern="/ws/Country" />
+
+    <endpoint
+        name="CityWebService"
+        implementation="gov.iti.jets.api.soap.services.City"
+        url-pattern="/ws/City" />
+
+    <endpoint
+        name="AddressWebService"
+        implementation="gov.iti.jets.api.soap.services.Address"
+        url-pattern="/ws/Address" />
+
+    <endpoint
+        name="FilmWebService"
+        implementation="gov.iti.jets.api.soap.services.Film"
+        url-pattern="/ws/Film" />
 </endpoints>

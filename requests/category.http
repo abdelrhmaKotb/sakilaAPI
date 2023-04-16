@@ -5,10 +5,73 @@ Content-Type: text/xml
     xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
     xmlns:jets="http://services.soap.api.jets.iti.gov/">
         <soap:Body>
-            <jets:add>
+            <jets:x />
+        </soap:Body>
+</soap:Envelope>
+
+###
+
+POST http://localhost:8090/sakilaAPI/ws/Category HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:getCategory>
+                <categoeyId>19</categoeyId>
+            </jets:getCategory>
+        </soap:Body>
+</soap:Envelope>
+
+###
+POST http://localhost:8090/sakilaAPI/ws/Category HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:createCategories>
             <arg0>
                 <name>gdf</name>
             </arg0>
-            </jets:add>
+            </jets:createCategories>
         </soap:Body>
 </soap:Envelope>
+
+###
+
+POST http://localhost:8090/sakilaAPI/ws/Category HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:deleteCategory>
+            <categoeyId>
+                26
+            </categoeyId>
+            </jets:deleteCategory>
+        </soap:Body>
+</soap:Envelope>
+
+###
+
+POST http://localhost:8090/sakilaAPI/ws/Category HTTP/1.1
+Content-Type: text/xml
+
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:jets="http://services.soap.api.jets.iti.gov/">
+        <soap:Body>
+            <jets:updateCategory>
+            <categoey>
+               <id>20</id>
+               <name>new category</name>
+            </categoey>
+            </jets:updateCategory>
+        </soap:Body>
+</soap:Envelope>
+

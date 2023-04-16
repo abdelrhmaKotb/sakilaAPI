@@ -3,6 +3,8 @@ package gov.iti.jets.repositories.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -10,23 +12,24 @@ import java.util.Set;
 @Table(name = "language")
 public class Language {
     @Id
-    @Column(name = "language_id", columnDefinition = "TINYINT UNSIGNED not null")
-    private Short id;
+    @Column(name = "language_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(name = "name", nullable = false, length = 20)
     private String name;
 
-    @Column(name = "last_update", nullable = false)
-    private Instant lastUpdate;
+    @Column(name = "last_update")
+    private Date lastUpdate = java.sql.Date.valueOf(LocalDate.now());
 
     @OneToMany(mappedBy = "originalLanguage")
     private Set<Film> films = new LinkedHashSet<>();
 
-    public Short getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Short id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -38,11 +41,11 @@ public class Language {
         this.name = name;
     }
 
-    public Instant getLastUpdate() {
+    public Date getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Instant lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 

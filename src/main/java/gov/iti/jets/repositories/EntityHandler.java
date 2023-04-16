@@ -7,6 +7,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 
 public class EntityHandler {
     private static EntityManagerFactory entityManagerFactory;
+    
 
     private EntityHandler() {
     };

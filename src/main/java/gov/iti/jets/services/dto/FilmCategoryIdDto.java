@@ -6,12 +6,14 @@ import java.io.Serializable;
  * A DTO for the {@link gov.iti.jets.repositories.entities.FilmCategoryId} entity
  */
 public class FilmCategoryIdDto implements Serializable {
-    private final Integer filmId;
-    private final Integer categoryId;
+    private  Integer filmId;
+    private  Integer categoryId;
 
-    public FilmCategoryIdDto(Integer filmId, Integer categoryId) {
-        this.filmId = filmId;
-        this.categoryId = categoryId;
+
+    
+    
+
+    public FilmCategoryIdDto() {
     }
 
     public Integer getFilmId() {
@@ -20,6 +22,14 @@ public class FilmCategoryIdDto implements Serializable {
 
     public Integer getCategoryId() {
         return categoryId;
+    }
+
+    public void setFilmId(Integer filmId) {
+        this.filmId = filmId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
   
 }

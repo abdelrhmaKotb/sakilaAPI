@@ -20,7 +20,7 @@ public class Category {
     @Column(name = "last_update", nullable = false)
     private Date lastUpdate;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
     private Set<FilmCategory> filmCategories = new LinkedHashSet<>();
 
     public Integer getId() {
@@ -54,5 +54,12 @@ public class Category {
     public void setFilmCategories(Set<FilmCategory> filmCategories) {
         this.filmCategories = filmCategories;
     }
+
+    @Override
+    public String toString() {
+        return "Category [id=" + id + ", name=" + name + "]";
+    }
+
+    
 
 }

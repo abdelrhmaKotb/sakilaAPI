@@ -90,4 +90,14 @@ public class RepositoryImpl<E, K> implements Repository<E, K> {
         return e;
     }
 
+    public <T> List<T> query(String query, String... param) {
+
+        var q = _entityManager.createQuery(query);
+      for (int param2 = 1; param2 <= param.length; param2++){
+        q.setParameter(param2, param[param2-1]);
+      }
+
+      return q.getResultList();
+    }
+
 }
