@@ -33,4 +33,24 @@
         name="FilmWebService"
         implementation="gov.iti.jets.api.soap.services.Film"
         url-pattern="/ws/Film" />
+
+    <endpoint
+        name="StoreWebService"
+        implementation="gov.iti.jets.api.soap.services.Store"
+        url-pattern="/ws/Store" />
+        
+    <endpoint
+        name="InventoryWebService"
+        implementation="gov.iti.jets.api.soap.services.Inventory"
+        url-pattern="/ws/Inventory" />
+
+    <endpoint
+        name="StaffWebService"
+        implementation="gov.iti.jets.api.soap.services.Staff"
+        url-pattern="/ws/Staff" />
+
+    <endpoint
+        name="CustomerWebService"
+        implementation="gov.iti.jets.api.soap.services.Customer"
+        url-pattern="/ws/Customer" />
 </endpoints>

@@ -1,12 +1,11 @@
 package gov.iti.jets.services;
 
-import gov.iti.jets.repositories.entities.City;
 import gov.iti.jets.repositories.entities.Film;
-import gov.iti.jets.services.dto.film.FilmDto;
-import gov.iti.jets.services.mappers.film.FilmMapper;
+import gov.iti.jets.services.dto.film.FlatFilmDto;
+import gov.iti.jets.services.mappers.film.FlatFilmMapper;
 
-public class FilmService extends ServiceImpl<Film, FilmDto, Integer> {
+public class FilmService extends ServiceImpl<Film, FlatFilmDto, Integer> {
     public FilmService() {
-        super(Film.class, FilmMapper.INSTANCE);
+        super(Film.class, FlatFilmMapper.INSTANCE);
     }
 }

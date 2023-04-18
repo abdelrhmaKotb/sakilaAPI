@@ -12,10 +12,13 @@ import gov.iti.jets.services.dto.FilmActorDto;
 import gov.iti.jets.services.dto.film.FilmDto;
 import gov.iti.jets.services.mappers.actor.ActorMapper;
 import gov.iti.jets.services.mappers.film.FilmMapper;
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
 import jakarta.persistence.Transient;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name = "actor")
+@Access(AccessType.FIELD)
 public class ActorDto implements Serializable {
 
     private Integer id;
@@ -30,11 +33,11 @@ public class ActorDto implements Serializable {
     private Set<FilmActor> filmActors = new LinkedHashSet<>();
     
 
+    @Transient
     public Set<FilmActor> getFilmActors() {
         return filmActors;
     }
 
-    @Transient
     public void setFilmActors(Set<FilmActor> filmActors) {
         this.filmActors = filmActors;
     }

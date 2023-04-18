@@ -29,7 +29,7 @@ public class FlatFilmDto implements Serializable {
 
     private Integer releaseYear;
 
-    // @NotNull(message = "film must have language")
+    @NotNull(message = "film must have language")
     private LanguageDto language;
 
     private LanguageDto originalLanguage;
@@ -50,8 +50,6 @@ public class FlatFilmDto implements Serializable {
     private String specialFeatures;
 
     private Date lastUpdate;
-
-    
 
     public FlatFilmDto() {
     }

@@ -60,6 +60,14 @@ public class RepositoryImpl<E, K> implements Repository<E, K> {
         return list;
     }
 
+    public List<E> findAll(int page, int count) {
+        List<E> list = (List<E>) _entityManager.createQuery("FROM " + type.getName() + " ", type)
+        .setFirstResult((page - 1) * count)
+        .setMaxResults(count)
+        .getResultList();
+        return list;
+    }
+
     @Override
     public boolean remove(E e) {
         try {
@@ -93,11 +101,21 @@ public class RepositoryImpl<E, K> implements Repository<E, K> {
     public <T> List<T> query(String query, String... param) {
 
         var q = _entityManager.createQuery(query);
-      for (int param2 = 1; param2 <= param.length; param2++){
-        q.setParameter(param2, param[param2-1]);
-      }
+        for (int param2 = 1; param2 <= param.length; param2++) {
+            q.setParameter(param2, param[param2 - 1]);
+        }
 
-      return q.getResultList();
+        return q.setMaxResults(2).getResultList();
+    }
+
+    public <T> List<T> query(String query, int page, String... param) {
+
+        var q = _entityManager.createQuery(query);
+        for (int param2 = 1; param2 <= param.length; param2++) {
+            q.setParameter(param2, param[param2 - 1]);
+        }
+
+        return q.setFirstResult((page - 1) * 10).setMaxResults(10).getResultList();
     }
 
 }

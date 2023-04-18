@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import gov.iti.jets.repositories.EntityHandler;
-
 @Entity
 @Table(name = "film")
 public class Film {
@@ -25,7 +23,7 @@ public class Film {
     @Column(name = "release_year")
     private Integer releaseYear;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true,cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "language_id")
     private Language language;
 
@@ -56,19 +54,19 @@ public class Film {
     @Column(name = "last_update")
     private Date lastUpdate;
 
-    @OneToMany(mappedBy = "film",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Inventory> inventories = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "film",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<FilmActor> actors = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "film",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<FilmCategory> filmCategories = new LinkedHashSet<>();
 
     // public void setActor(Actor actor){
-    //     FilmActor filmActor = new FilmActor(actor, this);
-    //     filmActors.add(filmActor);
-    //     actor.getFilmActors().add(filmActor);
+    // FilmActor filmActor = new FilmActor(actor, this);
+    // filmActors.add(filmActor);
+    // actor.getFilmActors().add(filmActor);
     // }
 
     public Integer getId() {
@@ -190,11 +188,11 @@ public class Film {
     public void setFilmActors(Set<FilmActor> actors) {
         // this.filmActors = filmActors;
         var i = actors.iterator();
-        while(i.hasNext()){
+        while (i.hasNext()) {
             System.out.println("here");
             this.actors.add(new FilmActor(i.next().getActor(), this));
         }
-        System.out.println("Ds " + actors );
+        System.out.println("Ds " + actors);
     }
 
     public Set<FilmCategory> getFilmCategories() {
@@ -214,7 +212,5 @@ public class Film {
                 + lastUpdate + ", inventories=" + inventories + ", filmActors=" + actors + ", filmCategories="
                 + filmCategories + "]";
     }
-
-    
 
 }

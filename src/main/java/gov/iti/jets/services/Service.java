@@ -22,4 +22,6 @@ public interface Service<E, D, P> {
 
     D update(D d) throws ValidationException, Exception;
 
+    D createOrUpdate(D d) throws ValidationException, Exception;
+
 }

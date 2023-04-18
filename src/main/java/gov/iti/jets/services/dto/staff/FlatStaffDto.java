@@ -1,55 +1,35 @@
-package gov.iti.jets.repositories.entities;
+package gov.iti.jets.services.dto.staff;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-@Entity
-@Table(name = "staff")
-public class Staff {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "staff_id", columnDefinition = "TINYINT UNSIGNED not null")
+import gov.iti.jets.services.dto.address.AddressDto;
+import gov.iti.jets.services.dto.store.FlatStoreDto;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "staff")
+public class FlatStaffDto implements Serializable{
     private Short id;
 
-    @Column(name = "first_name", nullable = false, length = 45)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "address_id", nullable = false)
-    private Address address;
+    private AddressDto address;
 
-    @Column(name = "picture")
     private byte[] picture;
 
-    @Column(name = "email", length = 50)
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
+    private FlatStoreDto store;
 
-    @Column(name = "active", nullable = false)
     private Boolean active = false;
 
-    @Column(name = "username", nullable = false, length = 16)
     private String username;
 
-    @Column(name = "password", length = 40)
     private String password;
 
-    @Column(name = "last_update", nullable = false)
     private Date lastUpdate;
-
-    @OneToMany(mappedBy = "staff")
-    private Set<Payment> payments = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "staff")
-    private Set<Rental> rentals = new LinkedHashSet<>();
 
     public Short getId() {
         return id;
@@ -75,11 +55,11 @@ public class Staff {
         this.lastName = lastName;
     }
 
-    public Address getAddress() {
+    public AddressDto getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressDto address) {
         this.address = address;
     }
 
@@ -99,11 +79,11 @@ public class Staff {
         this.email = email;
     }
 
-    public Store getStore() {
+    public FlatStoreDto getStore() {
         return store;
     }
 
-    public void setStore(Store store) {
+    public void setStore(FlatStoreDto store) {
         this.store = store;
     }
 
@@ -138,21 +118,5 @@ public class Staff {
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
-
-    public Set<Payment> getPayments() {
-        return payments;
-    }
-
-    public void setPayments(Set<Payment> payments) {
-        this.payments = payments;
-    }
-
-    public Set<Rental> getRentals() {
-        return rentals;
-    }
-
-    public void setRentals(Set<Rental> rentals) {
-        this.rentals = rentals;
-    }
-
+    
 }

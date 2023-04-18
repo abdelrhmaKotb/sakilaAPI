@@ -2,7 +2,6 @@ package gov.iti.jets.repositories.entities;
 
 import jakarta.persistence.*;
 
-import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -35,10 +34,10 @@ public class Customer {
     private Boolean active = false;
 
     @Column(name = "create_date", nullable = false)
-    private Instant createDate;
+    private java.util.Date createDate;
 
     @Column(name = "last_update", nullable = false)
-    private Instant lastUpdate;
+    private java.util.Date lastUpdate;
 
     @OneToMany(mappedBy = "customer")
     private Set<Payment> payments = new LinkedHashSet<>();
@@ -102,19 +101,19 @@ public class Customer {
         this.active = active;
     }
 
-    public Instant getCreateDate() {
+    public java.util.Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Instant createDate) {
+    public void setCreateDate(java.util.Date createDate) {
         this.createDate = createDate;
     }
 
-    public Instant getLastUpdate() {
+    public java.util.Date getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Instant lastUpdate) {
+    public void setLastUpdate(java.util.Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 

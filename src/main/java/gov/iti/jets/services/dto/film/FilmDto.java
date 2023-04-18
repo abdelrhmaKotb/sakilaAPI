@@ -16,10 +16,9 @@ import gov.iti.jets.services.dto.categories.CategoryDto;
 import gov.iti.jets.services.dto.language.LanguageDto;
 import gov.iti.jets.services.mappers.actor.ActorMapper;
 import gov.iti.jets.services.mappers.film.FilmMapper;
-import jakarta.persistence.Transient;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name = "film")
 public class FilmDto implements Serializable {
    
     private Integer id;
@@ -27,12 +26,11 @@ public class FilmDto implements Serializable {
     @NotEmpty(message = "film must have title")
     private String title;
 
-   
     private String description;
 
     private Integer releaseYear;
 
-    // @NotNull(message = "film must have language")
+    @NotNull(message = "film must have language")
     private LanguageDto language;
 
     private LanguageDto originalLanguage;
@@ -77,9 +75,6 @@ public class FilmDto implements Serializable {
 
     public void setActor(ActorDto actor){
         FilmActor filmActor = new FilmActor(ActorMapper.INSTANCE.toEntity(actor),FilmMapper.INSTANCE.toEntity(this));
-        // filmActor.setActor();
-        // filmActor.setFilm();
-        System.out.println(filmActor);
         filmActors.add(filmActor);
         actor.getFilmActors().add(filmActor);
     }
