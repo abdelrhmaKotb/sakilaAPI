@@ -35,7 +35,7 @@ To get started with this project, you will need to clone this repository onto yo
 To deploy this project run
 
 ```bash
-  cd Sakila-API
+  cd sakilaAPI
   mvn install tomcat7:deploy
 ```
 
