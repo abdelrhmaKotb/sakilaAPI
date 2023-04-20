@@ -30,13 +30,15 @@ public class FilmService extends ServiceImpl<Film, FlatFilmDto, Integer> {
             e.setLastUpdate(Date.valueOf(LocalDate.now()));
 
             Actor a = actorRepository.find(e.getId());
-        
+            
+            service.get_impl().addToContext(a);
 
             filmDto.setActor(a);
         });
 
-        FilmDto dto =  service.createOrUpdate(filmDto);
-        return dto.getId();
+        FilmDto dto =  service.add(filmDto);
+        System.out.println(filmDto);
+        return filmDto.getId();
     }
 
 }
