@@ -44,9 +44,6 @@ To deploy this project run
 
 - [Documentation](https://documenter.getpostman.com/view/18968433/2s93Y3ug3i)
 
-## Usage
-- The REST endpoints can be accessed at http://localhost:8090/sakilaAPI/rest
-- The SOAP endpoints can be accessed at http://localhost:8090/sakilaAPI/soap
 ## REST API Reference
 
 - The REST API provides endpoints for CRUD operation at all the resources in addintion to enpoints for the bussines logic.
