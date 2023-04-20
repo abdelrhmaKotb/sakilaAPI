@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import gov.iti.jets.services.dto.address.AddressDto;
-import gov.iti.jets.services.dto.staff.FlatStaffDto;
 import gov.iti.jets.services.dto.staff.ManagerStaffDto;
 import jakarta.xml.bind.annotation.XmlRootElement;
 

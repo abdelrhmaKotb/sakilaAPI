@@ -25,7 +25,7 @@ public class Inventory {
     @Column(name = "last_update", nullable = false)
     private Date lastUpdate;
 
-    @OneToMany(mappedBy = "inventory")
+    @OneToMany(mappedBy = "inventory",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Rental> rentals = new LinkedHashSet<>();
 
     public Integer getId() {
@@ -67,5 +67,14 @@ public class Inventory {
     public void setRentals(Set<Rental> rentals) {
         this.rentals = rentals;
     }
+
+    @Override
+    public String toString() {
+        return "Inventory [id=" + id + ", film=" + film.getTitle() + ", store=" + store.getId() + ", lastUpdate=" + lastUpdate
+                + ", rentals=" + rentals + "]";
+    }
+
+
+    
 
 }

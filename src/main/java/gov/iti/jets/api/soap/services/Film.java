@@ -8,7 +8,6 @@ import gov.iti.jets.exceptions.ValidationException;
 import gov.iti.jets.services.FilmService;
 import gov.iti.jets.services.dto.film.FilmDto;
 import gov.iti.jets.services.dto.film.FlatFilmDto;
-import gov.iti.jets.services.mappers.film.FlatFilmMapper;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
@@ -40,27 +39,18 @@ public class Film {
         return filmService.get(id);
     }
 
-    // /**
-    //  * this method to add film in database
-    //  * 
-    //  * @param film
-    //  * @return film
-    //  * @throws ValidationException
-    //  */
+    /**
+     * this method to add film in database
+     * 
+     * @param film id
+     * @return Integer  filmid 
+     * @throws ValidationException
+     */
 
-    // public Integer createFilm(@WebParam(name = "film") FilmDto filmDto)
-    //         throws ValidationException, Exception {
-    //     filmDto.setLastUpdate(Date.valueOf(LocalDate.now()));
-    //     System.out.println(filmDto);
-    //     filmDto.getActors().forEach(e -> {
-    //         e.setLastUpdate(Date.valueOf(LocalDate.now()));
-    //         filmDto.setActor(e);
-    //     });
-    //     var res = filmService.add(filmDto);
-    //     // filmDto.setId(res.getId());
-    //     return res.getId();
-    //     // return filmDto;
-    // }
+    public Integer createFilm(@WebParam(name = "film") FilmDto filmDto)
+            throws ValidationException, Exception {
+        return filmService.createFilm(filmDto);
+    }
 
     /**
      * @param int id
@@ -72,16 +62,16 @@ public class Film {
         return true;
     }
 
-    // /**
-    //  * update film
-    //  * 
-    //  * @param ActorDto
-    //  * @return
-    //  * @throws Exception
-    //  */
-    // public FilmDto updateFilm(@WebParam(name = "film") FilmDto filmDto) throws Exception {
-    //     filmDto.setLastUpdate(Date.valueOf(LocalDate.now()));
-    //     return filmService.update(filmDto);
-    // }
+    /**
+     * update film
+     * 
+     * @param ActorDto
+     * @return
+     * @throws Exception
+     */
+    public FlatFilmDto updateFilm(@WebParam(name = "film") FlatFilmDto filmDto) throws Exception {
+        filmDto.setLastUpdate(Date.valueOf(LocalDate.now()));
+        return filmService.update(filmDto);
+    }
 
 }

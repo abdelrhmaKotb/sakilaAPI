@@ -12,7 +12,7 @@ public class FilmActor {
     private FilmActorId id = new FilmActorId();
 
     @MapsId("actorId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false,cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "actor_id", nullable = false)
     private Actor actor;
 
@@ -74,7 +74,7 @@ public class FilmActor {
 
     @Override
     public String toString() {
-        return "FilmActor [id=" + id + ", actor=" + actor.getId() + ", film=" + film.getId() + ", lastUpdate=" + lastUpdate + "]";
+        return "FilmActor [id=" + id + ", actor=" + actor + ", film=" + film.getId() + ", lastUpdate=" + lastUpdate + "]";
     }
 
     

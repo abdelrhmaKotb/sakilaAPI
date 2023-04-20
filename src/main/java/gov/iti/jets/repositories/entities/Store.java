@@ -1,8 +1,11 @@
 package gov.iti.jets.repositories.entities;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,13 +28,13 @@ public class Store {
     private Date lastUpdate;
 
     @OneToMany(mappedBy = "store")
-    private Set<Inventory> inventories = new LinkedHashSet<>();
+    private List<Inventory> inventories = new ArrayList<>();
 
     @OneToMany(mappedBy = "store")
-    private Set<Staff> staff = new LinkedHashSet<>();
+    private List<Staff> staff = new ArrayList<>();
 
     @OneToMany(mappedBy = "store")
-    private Set<Customer> customers = new LinkedHashSet<>();
+    private List<Customer> customers = new ArrayList<>();
 
     public Short getId() {
         return id;
@@ -65,27 +68,27 @@ public class Store {
         this.lastUpdate = lastUpdate;
     }
 
-    public Set<Inventory> getInventories() {
+    public List<Inventory> getInventories() {
         return inventories;
     }
 
-    public void setInventories(Set<Inventory> inventories) {
+    public void setInventories(List<Inventory> inventories) {
         this.inventories = inventories;
     }
 
-    public Set<Staff> getStaff() {
+    public List<Staff> getStaff() {
         return staff;
     }
 
-    public void setStaff(Set<Staff> staff) {
+    public void setStaff(List<Staff> staff) {
         this.staff = staff;
     }
 
-    public Set<Customer> getCustomers() {
+    public List<Customer> getCustomers() {
         return customers;
     }
 
-    public void setCustomers(Set<Customer> customers) {
+    public void setCustomers(List<Customer> customers) {
         this.customers = customers;
     }
 

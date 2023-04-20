@@ -62,9 +62,9 @@ public class RepositoryImpl<E, K> implements Repository<E, K> {
 
     public List<E> findAll(int page, int count) {
         List<E> list = (List<E>) _entityManager.createQuery("FROM " + type.getName() + " ", type)
-        .setFirstResult((page - 1) * count)
-        .setMaxResults(count)
-        .getResultList();
+                .setFirstResult((page - 1) * count)
+                .setMaxResults(count)
+                .getResultList();
         return list;
     }
 
@@ -116,6 +116,22 @@ public class RepositoryImpl<E, K> implements Repository<E, K> {
         }
 
         return q.setFirstResult((page - 1) * 10).setMaxResults(10).getResultList();
+    }
+
+    public void delete(String query, String... param) {
+
+        var q = _entityManager.createQuery(query);
+        for (int param2 = 1; param2 <= param.length; param2++) {
+            q.setParameter(param2, param[param2 - 1]);
+        }
+        _entityManager.getTransaction().begin();
+        q.executeUpdate();
+        _entityManager.getTransaction().commit();
+    }
+
+    public void addToContext(Object obj){
+        System.out.println("obj" + obj);
+        _entityManager.merge(obj);
     }
 
 }

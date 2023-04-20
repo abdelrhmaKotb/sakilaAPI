@@ -37,8 +37,6 @@ public class ServiceImpl<E, D, P> implements Service<E, D, P> {
 
         E e = _mapper.toEntity(d);
 
-        System.out.println("entity " + e);
-
         E res = _impl.create(e);
 
         if (res == null) {
@@ -88,7 +86,6 @@ public class ServiceImpl<E, D, P> implements Service<E, D, P> {
 
         E e = _mapper.toEntity(d);
 
-        System.out.println(e);
 
         E res = _impl.update(e);
 
@@ -96,7 +93,6 @@ public class ServiceImpl<E, D, P> implements Service<E, D, P> {
             throw new Exception("there is an error ! try again later");
         }
 
-        System.out.println("res" + res);
 
         return _mapper.toDto(res);
 
@@ -114,7 +110,6 @@ public class ServiceImpl<E, D, P> implements Service<E, D, P> {
 
         E e = _mapper.toEntity(d);
 
-        System.out.println(e);
 
         E res = _impl.update(e);
 
@@ -122,7 +117,6 @@ public class ServiceImpl<E, D, P> implements Service<E, D, P> {
             throw new Exception("there is an error ! try again later");
         }
 
-        System.out.println("res" + res);
 
         return _mapper.toDto(res);
 

@@ -23,7 +23,7 @@ public class Film {
     @Column(name = "release_year")
     private Integer releaseYear;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "language_id")
     private Language language;
 
@@ -54,11 +54,12 @@ public class Film {
     @Column(name = "last_update")
     private Date lastUpdate;
 
-    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Inventory> inventories = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<FilmActor> actors = new LinkedHashSet<>();
+    private Set<FilmActor> filmActors = new LinkedHashSet<>();
+
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<FilmCategory> filmCategories = new LinkedHashSet<>();
@@ -68,6 +69,11 @@ public class Film {
     // filmActors.add(filmActor);
     // actor.getFilmActors().add(filmActor);
     // }
+
+    public void removeInvntory(Inventory inventory){
+        inventories.remove(inventory);
+        inventory.setFilm(null);
+    }
 
     public Integer getId() {
         return id;
@@ -182,17 +188,15 @@ public class Film {
     }
 
     public Set<FilmActor> getFilmActors() {
-        return actors;
+        return filmActors;
     }
 
-    public void setFilmActors(Set<FilmActor> actors) {
+    public void setFilmActors(Set<FilmActor> actorsss) {
         // this.filmActors = filmActors;
-        var i = actors.iterator();
+        var i = actorsss.iterator();
         while (i.hasNext()) {
-            System.out.println("here");
-            this.actors.add(new FilmActor(i.next().getActor(), this));
+            this.filmActors.add(new FilmActor(i.next().getActor(), this));
         }
-        System.out.println("Ds " + actors);
     }
 
     public Set<FilmCategory> getFilmCategories() {
@@ -209,7 +213,7 @@ public class Film {
                 + ", language=" + language + ", originalLanguage=" + originalLanguage + ", rentalDuration="
                 + rentalDuration + ", rentalRate=" + rentalRate + ", length=" + length + ", replacementCost="
                 + replacementCost + ", rating=" + rating + ", specialFeatures=" + specialFeatures + ", lastUpdate="
-                + lastUpdate + ", inventories=" + inventories + ", filmActors=" + actors + ", filmCategories="
+                + lastUpdate + ", inventories=" + inventories + ", filmActors=" + filmActors + ", filmCategories="
                 + filmCategories + "]";
     }
 

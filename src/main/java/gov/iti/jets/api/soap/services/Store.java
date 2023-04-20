@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.List;
 import gov.iti.jets.exceptions.ValidationException;
 import gov.iti.jets.services.StoreService;
+import gov.iti.jets.services.dto.customer.FlatCustomerDto;
+import gov.iti.jets.services.dto.inventory.FlatInventoryDto;
+import gov.iti.jets.services.dto.staff.FlatStaffDto;
 import gov.iti.jets.services.dto.store.FlatStoreDto;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebResult;
@@ -75,6 +78,29 @@ public class Store {
     public FlatStoreDto updateStore(@WebParam(name = "store") FlatStoreDto storeDto) throws Exception {
         storeDto.setLastUpdate(Date.valueOf(LocalDate.now()));
         return storeService.update(storeDto);
+    }
+
+
+   
+    /**
+     * @return
+     */
+    public List<FlatStaffDto> getStoreStaff(@WebParam(name = "storeId") Short id){
+        return storeService.getStoreStaff(id);
+    }
+
+    /**
+     * @return
+     */
+    public List<FlatInventoryDto> getStoreInventories(@WebParam(name = "storeId") Short id){
+        return storeService.getStoreInventories(id);
+    }
+
+    /**
+     * @return
+     */
+    public List<FlatCustomerDto> getStoreCustomers(@WebParam(name = "storeId") Short id){
+        return storeService.getStoreCustomers(id);
     }
 
 

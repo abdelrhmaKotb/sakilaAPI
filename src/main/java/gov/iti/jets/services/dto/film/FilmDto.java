@@ -9,6 +9,9 @@ import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import gov.iti.jets.repositories.entities.Actor;
+import gov.iti.jets.repositories.entities.Film;
 import gov.iti.jets.repositories.entities.FilmActor;
 import gov.iti.jets.services.dto.FilmCategoryDto;
 import gov.iti.jets.services.dto.actor.ActorDto;
@@ -20,7 +23,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "film")
 public class FilmDto implements Serializable {
-   
+
     private Integer id;
 
     @NotEmpty(message = "film must have title")
@@ -52,7 +55,6 @@ public class FilmDto implements Serializable {
 
     private Date lastUpdate;
 
-
     private List<ActorDto> actors = new ArrayList<>();
 
     public void setActors(List<ActorDto> actors) {
@@ -73,8 +75,8 @@ public class FilmDto implements Serializable {
 
     private Set<FilmCategoryDto> filmCategories = new LinkedHashSet<>();
 
-    public void setActor(ActorDto actor){
-        FilmActor filmActor = new FilmActor(ActorMapper.INSTANCE.toEntity(actor),FilmMapper.INSTANCE.toEntity(this));
+    public void setActor(Actor actor) {
+        FilmActor filmActor = new FilmActor(actor, new Film());
         filmActors.add(filmActor);
         actor.getFilmActors().add(filmActor);
     }
@@ -183,13 +185,8 @@ public class FilmDto implements Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-
     public List<ActorDto> getActors() {
         return actors;
-    }
-
-    public void setActors(ActorDto actor) {
-           
     }
 
     public List<CategoryDto> getCategories() {
@@ -199,10 +196,6 @@ public class FilmDto implements Serializable {
     public void setCategories(List<CategoryDto> categories) {
         this.categories = categories;
     }
-
-
-    
-  
 
     @Override
     public String toString() {
@@ -214,14 +207,12 @@ public class FilmDto implements Serializable {
                 + filmActors + ", filmCategories=" + filmCategories + "]";
     }
 
-
-
     public Set<FilmCategoryDto> getFilmCategories() {
         return filmCategories;
     }
 
     public void setFilmCategories(Set<FilmCategoryDto> filmCategories) {
         this.filmCategories = filmCategories;
-    }    
+    }
 
 }

@@ -28,6 +28,16 @@ public class Actor {
     @OneToMany(mappedBy = "actor",cascade = CascadeType.ALL)
     private Set<FilmActor> films = new LinkedHashSet<>();
 
+    
+    
+
+    public Actor() {
+    }
+
+    public Actor(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

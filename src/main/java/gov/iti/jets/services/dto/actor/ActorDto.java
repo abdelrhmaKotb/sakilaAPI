@@ -31,7 +31,22 @@ public class ActorDto implements Serializable {
 
     @Transient
     private Set<FilmActor> filmActors = new LinkedHashSet<>();
+
     
+    
+
+    
+
+    public ActorDto(Integer id) {
+        this.id = id;
+    }
+
+
+
+    public ActorDto() {
+    }
+
+
 
     @Transient
     public Set<FilmActor> getFilmActors() {
