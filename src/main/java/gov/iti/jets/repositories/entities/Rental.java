@@ -3,7 +3,10 @@ package gov.iti.jets.repositories.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,17 +29,17 @@ public class Rental {
     private Customer customer;
 
     @Column(name = "return_date")
-    private Instant returnDate;
+    private Date returnDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "staff_id", nullable = false)
     private Staff staff;
 
     @Column(name = "last_update", nullable = false)
-    private Instant lastUpdate;
+    private Date lastUpdate;
 
     @OneToMany(mappedBy = "rental")
-    private Set<Payment> payments = new LinkedHashSet<>();
+    private List<Payment> payments = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -70,11 +73,11 @@ public class Rental {
         this.customer = customer;
     }
 
-    public Instant getReturnDate() {
+    public Date getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Instant returnDate) {
+    public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
     }
 
@@ -86,19 +89,19 @@ public class Rental {
         this.staff = staff;
     }
 
-    public Instant getLastUpdate() {
+    public Date getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Instant lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
-    public Set<Payment> getPayments() {
+    public List<Payment> getPayments() {
         return payments;
     }
 
-    public void setPayments(Set<Payment> payments) {
+    public void setPayments(List<Payment> payments) {
         this.payments = payments;
     }
 

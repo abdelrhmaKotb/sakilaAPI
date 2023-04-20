@@ -53,4 +53,9 @@
         name="CustomerWebService"
         implementation="gov.iti.jets.api.soap.services.Customer"
         url-pattern="/ws/Customer" />
+
+    <endpoint
+        name="RentalWebService"
+        implementation="gov.iti.jets.api.soap.services.Rental"
+        url-pattern="/ws/Rental" />
 </endpoints>
